@@ -1,0 +1,18 @@
+
+
+	def createConnection() = {
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		DriverManager.getConnection("jdbc:mysql://localhost/sales?user=mike");
+	}
+
+	def extractValues(r: ResultSet) = {
+		(r.getInt(1), r.getString(2))
+	}
+
+	val data = new JdbcRDD(sc,
+	createConnection, "SELECT * FROM orders WHERE ? <= id AND id <= ?",
+	lowerBound = 10, upperBound = 300, numPartitions = 2, mapRow = extractValues)
+	
+	println(data.collect().toList)
+	
+	

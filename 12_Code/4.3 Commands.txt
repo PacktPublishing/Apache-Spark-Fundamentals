@@ -1,0 +1,82 @@
+
+hadoop fs -ls
+
+hadoop fs -put README.md
+
+hadoop fs -put README
+
+hadoop fs -ls
+
+val file = sc.textFile("README.md")
+
+val allWords = file.flatMap(_.split("\\W+"))
+
+val words = allWords.filter(!_.isEmpty)
+
+val pairs = words.map((_,1))
+
+val reducedByKey = pairs.reduceByKey(_ + _)
+
+val top10words = reducedByKey.takeOrdered(10)(Ordering[Int].reverse.on(_._2))
+
+*********************************************
+
+val numbers = sc.parallelize(List(1, 2, 3, 4, 3, 2, 1))
+
+val uniqueNumbers = numbers.distinct
+
+val uniqueNumbersResult = uniqueNumbers.collect
+
+val uniqueNumbersResult = uniqueNumbers.count
+
+println(numbers.count())
+
+println(numbers.collect().mkString(","))
+
+*******************************************
+
+val numberList = sc.parallelize(List(1, 2, 3, 4, 3, 2, 1))
+
+val first3 = numberList.take(3)
+
+val largest3 = numberList.top(3)
+
+val firstElement = numberList.first
+
+val sum = numberList.reduce ((x, y) => x + y)
+
+val product = numberList.reduce((x, y) => x * y)
+
+val sum = numberList.fold(0) ((partialSum, x) => partialSum + x)
+
+val product = numberList.fold(1) ((partialProduct, x) => partialProduct * x)
+
+*************************************************
+
+val numbers = sc.parallelize(List(1, 2, 3, 4, 3, 2, 1))
+
+println(numbers.count())
+
+println(numbers.collect().mkString(","))
+
+numbers.persist(DISK_ONLY)
+
+println(numbers.count())
+
+println(numbers.collect().mkString(","))
+
+******************************************************
+
+val file = sc.textFile("README.md")
+
+val allWords = file.flatMap(_.split("\\W+"))
+
+val words = allWords.filter(!_.isEmpty)
+
+val pairs = words.map((_,1))
+
+val wordCount = pairs.reduceByKey(_ + _)
+
+numbers.persist()
+
+print(wordCount.toDebugString())

@@ -1,0 +1,10 @@
+
+hadoop fs -ls
+
+hadoop fs -rm -r output
+
+export SPARK_MAJOR_VERSION=2
+
+spark-submit --class packt.spark.sec5.SparkWordcount --master local --num-executors 1 --driver-memory 512m --executor-memory 512m --executor-cores 1 SparkWordCount.jar 10 README.md output
+
+spark-submit --class packt.spark.sec5.SparkWordcount --master yarn --num-executors 1 --driver-memory 512m --executor-memory 512m --executor-cores 1 SparkWordCount.jar 10 README.md output

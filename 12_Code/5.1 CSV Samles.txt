@@ -1,0 +1,14 @@
+
+=============================================
+
+	val input = sc.textFile(inputFile)
+	val result = input.map{ line =>
+		val reader = new CSVReader(new StringReader(line));
+		reader.readNext();
+	}
+
+	
+================================================
+
+	
+

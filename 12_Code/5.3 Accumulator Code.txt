@@ -1,0 +1,31 @@
+
+
+// Accumulator Example
+
+val file = sc.textFile("README.md")
+
+val blankLinesAcc = sc.accumulator(0) 
+
+val checkLines = file.flatMap(line => {
+if (line == "") {
+blankLinesAcc += 1 // Add to the accumulator
+}
+line.split(" ")
+})
+
+checkLines.saveAsTextFile("README-Output")
+
+println("Blank lines: " + blankLinesAcc.value)
+
+hadoop fs -ls README-Output/
+
+hadoop fs -cat README-Output/part-00000
+
+
+// Broadcast variable Example
+
+val broadcastVar = sc.broadcast(Array(1, 2, 3))
+
+broadcastVar.value
+
+

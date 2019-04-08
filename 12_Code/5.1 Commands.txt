@@ -1,0 +1,35 @@
+
+Loading data from Text File
+=========================
+
+hadoop fs -ls
+
+hadoop fs -put README.md
+
+hadoop fs -put README
+
+hadoop fs -ls
+
+val file = sc.textFile("README.md")
+
+file.take(2).foreach(println)
+
+val input = sc.wholeTextFiles("Monthly-sales")
+
+result.saveAsTextFile(outputFile)
+
+
+Loading data from JSON File
+=========================
+val dfs = sqlContext.read.json("file:///opt/Employee.json")
+
+dfs.printSchema()
+
+dfs.show()
+
+=================================
+
+val file = sc.textFile("README.md")
+
+val rdd = sc.textFile("file:///usr/hdp/2.5.0.0-1245/spark/derby.log")
+

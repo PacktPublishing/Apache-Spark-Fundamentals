@@ -1,0 +1,52 @@
+
+
+
+object InterestCalculator {
+  
+  def getSimpleInterest(principal: Int, rate: Int, durationYear: Int): Float =
+    (principal*rate*durationYear)/100
+}
+
+InterestCalculator.getSimpleInterest(10000, 12, 2)
+
+
+
+class Student () {
+  
+  val message: String = "Hello "
+  
+  private var name: String = ""
+  
+  def setName(stuName: String){
+    name = stuName
+  }
+  
+  def welcome(): String = message + name
+
+}
+
+val student1 = new Student
+
+student1.name = "Mike"
+
+student1.setName("Mike")
+
+student.welcome()
+
+
+
+
+
+
+
+
+
+def welcome(message: String = "Hello", name: String = "" ): String = message + " " + name
+
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+
+
+val pairs = sc.parallelize(List((1, 1), (2, 2), (3, 3)))
+
+pairs.partitioner
+
+val pairs = sc.parallelize(List((1, 1), (2, 2), (3, 3)), 2)
+
+pairs.partitioner
+
+rdd.partitions.size
+
+val partitioned = pairs.partitionBy(new org.apache.spark.HashPartitioner(2))
